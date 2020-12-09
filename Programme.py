@@ -1,30 +1,33 @@
 from colorama import Fore, Back, Style
 
-def chercheLettreCorrect(motEcrit,motDevine) :
-    i = 0 
-    j = 0
-    for j in range (0,5):  
-        for i in range (0,5):
-            if motDevine[j]==motEcrit[i]:
-               print (Back.RED+motEcrit[i])
+def chercheLettreCorrect(motDevine,motEcrit) :
+    stockage = 0
+    Vrai=False
+    Milieu=0
+    for j in range (len(motDevine)): 
+        i=0 
+        while (stockage==0):
+            i=i+1
+            if (motDevine[j]==motEcrit[i]):
+                if (i == j ):        
+                    Vrai=True
+                    stockage = i 
+                else:
+                    stockage = i
+            else:
+                Milieu=1
+                stockage = i
+        if Vrai==True :
+           print (Back.MAGENTA+motEcrit[stockage])
+           Vrai=False
+        else:
+            print (Back.RED+motEcrit[stockage])
+        if Milieu == 1 : 
+            print (Back.CYAN+motEcrit[stockage])
 
-def chercheLettreFause(motEcrit,motDevine) :
-    i = 0 
-    j = 0
-    for j in range (0,5):  
-        for i in range (0,5):
-            if motDevine[i]!=motEcrit[j]:
-               print (Back.BLUE+motEcrit[j])
 
-def chercheLettreMalPlacé(motEcrit,motDevine) :
-    i = 0 
-    j = 0
-    for j in range (0,5):  
-        for i in range (0,5):
-            if motDevine[j]==motEcrit[i]:
-               print (Back.YELLOW+motEcrit[i])
+motADeviner = 'arbres'
+motEcrit = input("Quel est le mot caché en 6 lettres ?")
+chercheLettreCorrect(motADeviner,motEcrit)
+#chercheLettreFause(motEcris,motADeviner)
 
-motADeviner=['a','r','b','r','e','s']
-motEcris=input("Quel est le mot caché en 6 lettres ?")
-print ( motEcris)
-print (motADeviner)
